@@ -1,0 +1,32 @@
+.book {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, 1fr);
+
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+
+  width: auto;
+  cursor: pointer;
+
+  &__cover {
+    grid-column: 1;
+
+    &__image {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 2 / 3;
+      object-fit: scale-down;
+    }
+  }
+
+  &__info {
+    grid-column: 2 / -1;
+  }
+
+  &__info-section {
+    margin-bottom: 1rem;
+  }
+}
