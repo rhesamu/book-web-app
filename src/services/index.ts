@@ -1,20 +1,20 @@
+import { Book } from "@/types";
 
 export async function getBooks() {
   let books;
 
-  // check localstorage
   const localBooks = localStorage.getItem('books');
   if (localBooks) {
     books = JSON.parse(localBooks);
   } else {
-  // if empty, fetch from API
     const response = await fetch('https://my-json-server.typicode.com/cutamar/mock/books');
 
     if (!response.ok) {
       throw new Error('Failed to fetch books');
     }
 
-    books = response.json();
+    books = await response.json();
+    setLocalBooks(books);
   }
 
   return books;
@@ -36,6 +36,43 @@ export async function getBookDetail(id: number | null) {
   }
 
   return response.json();
+}
+
+export function setLocalBooks(books: Book[]) {
+  localStorage.setItem('books', JSON.stringify(books));
+}
+
+export function addLocalBook(book: Book) {
+  const localBooks = localStorage.getItem('books');
+
+  if (localBooks) {
+    const parsedBooks = JSON.parse(localBooks);
+    const newId = parsedBooks[parsedBooks.length - 1]?.id + 1;
+    const newBook = { ...book, id: newId };
+    const newBooks = [...parsedBooks, newBook];
+    setLocalBooks(newBooks);
+  }
+}
+
+export function updateLocalBook(book: Book) {
+  const localBooks = localStorage.getItem('books');
+
+  if (localBooks) {
+    const parsedBooks = JSON.parse(localBooks);
+    const index = parsedBooks.findIndex((b: Book) => b.id === book.id);
+    parsedBooks[index] = book;
+    setLocalBooks(parsedBooks);
+  }
+}
+
+export function deleteLocalBook(id: number) {
+  const localBooks = localStorage.getItem('books');
+
+  if (localBooks) {
+    const parsedBooks = JSON.parse(localBooks);
+    const filtered = parsedBooks.filter((book: Book) => book.id !== id);
+    setLocalBooks(filtered);
+  }
 }
 
 export function getLocalFavorites() {
