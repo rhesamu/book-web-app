@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 
-import { getBooks, getLocalFavorites } from '@/services';
+import { getBooks, deleteLocalBook, getLocalFavorites } from '@/services';
 import { useFavorites } from '@/hooks';
 
-import { Book, Pagination, BookDetailsModal } from '@/components';
+import { Book, Pagination, BookDetailsModal, DeleteConfirmationModal } from '@/components';
 import { Book as BookType } from '@/types';
 
 const Books: React.FC = () => {
@@ -19,11 +20,12 @@ const Books: React.FC = () => {
       }));
     }
   });
-
+  const navigate = useNavigate();
   const { favorites, handleFavorites } = useFavorites();
-  const [currentPage, setCurrentPage] = useState(1);
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isBookDetailsOpen, setIsBookDetailsOpen] = useState(false);
+  const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
   const handlePageChange = (pageNumber: number) => {
@@ -32,11 +34,30 @@ const Books: React.FC = () => {
 
   const onClickBook = (id: number) => {
     setSelectedId(id);
-    setIsOpen(true);
+    setIsBookDetailsOpen(true);
   };
 
   const onCloseDetailsModal = () => {
-    setIsOpen(false);
+    setIsBookDetailsOpen(false);
+    setSelectedId(null);
+  };
+
+  const onEdit = (id: number) => navigate(`edit/${id}`);
+
+  const onDelete = () => {
+    deleteLocalBook(Number(selectedId));
+    setIsDeleteConfirmationOpen(false);
+    setSelectedId(null);
+    window.location.reload();
+  };
+
+  const showDeleteConfirmation = (id: number) => {
+    setIsDeleteConfirmationOpen(true);
+    setSelectedId(id);
+  };
+
+  const onCloseDeleteConfirmation = () => {
+    setIsDeleteConfirmationOpen(false);
     setSelectedId(null);
   };
 
@@ -57,6 +78,7 @@ const Books: React.FC = () => {
     return (
       <div>
         <h1>Books</h1>
+        <button onClick={() => navigate('create')}>Create</button>
         <ul>
           {currentItems.map((book: BookType) => (
             <li key={book.id}>
@@ -65,12 +87,19 @@ const Books: React.FC = () => {
                 isFavorite={favorites.includes(book.id)}
                 setFavorite={handleFavorites}
                 handleClick={() => onClickBook(book.id)}
+                onEdit={() => onEdit(book.id)}
+                onDelete={() => showDeleteConfirmation(book.id)}
               />
             </li>
           ))}
         </ul>
         <Pagination handleChange={handlePageChange} totalPages={totalPages} />
-        <BookDetailsModal isOpen={isOpen} onClose={onCloseDetailsModal} selectedId={selectedId} />
+        <BookDetailsModal isOpen={isBookDetailsOpen} onClose={onCloseDetailsModal} selectedId={selectedId} />
+        <DeleteConfirmationModal
+          isOpen={isDeleteConfirmationOpen}
+          onClose={onCloseDeleteConfirmation}
+          onConfirm={onDelete}
+        />
       </div>
     );
   }
