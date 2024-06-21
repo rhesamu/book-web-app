@@ -10,4 +10,5 @@ export default defineConfig({
     },
   },
   plugins: [react()],
+  base: '/book-web-app/'
 })
