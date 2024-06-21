@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { getBooks, deleteLocalBook, getLocalFavorites } from '@/services';
 import { useFavorites } from '@/hooks';
 
-import { Book, Pagination, BookDetailsModal, DeleteConfirmationModal } from '@/components';
+import { Book, Pagination, BookDetailsModal, DeleteConfirmationModal, LoadingSkeleton } from '@/components';
 import { Book as BookType } from '@/types';
 
 import './styles.scss';
@@ -64,7 +64,7 @@ const Books: React.FC = () => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingSkeleton type='main'/>;
   }
 
   if (isError) {

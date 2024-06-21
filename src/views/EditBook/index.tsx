@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
-import { Form } from "@/components";
+import { Form, LoadingSkeleton } from "@/components";
 import { Book } from "@/types";
 import { getBookDetail, updateLocalBook } from '@/services';
 
@@ -20,7 +20,7 @@ const EditBook = () => {
   };
 
   const content = () => {
-    if (isLoading) return <div>Loading...</div>;
+    if (isLoading) return <LoadingSkeleton type='form' />;
     if (isError) return <div>Error</div>;
     if (data) {
       return (

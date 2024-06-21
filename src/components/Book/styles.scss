@@ -44,5 +44,32 @@
       display: flex;
       gap: 0.5rem;
     }
+
+    &-edit {
+      transition: border-color 0.25s, color 0.25s;
+
+      &:hover {
+        border-color: var(--color-primary);
+        color: #a8acff ;
+      }
+    }
+
+    &-delete {
+      transition: border-color 0.25s, color 0.25s;
+
+      &:hover {
+        border-color: var(--color-danger);
+        color: var(--color-danger) ;
+      }
+    }
+
+    &-favorite {
+      transition: border-color 0.25s, color 0.25s;
+
+      &:hover {
+        border-color: #fb94fd;
+        color: #fb94fd ;
+      }
+    }
   }
 }
