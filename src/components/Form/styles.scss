@@ -1,0 +1,30 @@
+.form-input {
+  &__container {
+    margin: 1rem 0;
+
+    label {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+  }
+
+  &__element {
+    width: 100%;
+    padding: 0.5rem;
+  }
+}
+
+.input-text-area {
+  resize: none;
+  min-height: 80px;
+  font-family: inherit;
+}
+
+.input-error {
+  color: var(--color-danger);
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}

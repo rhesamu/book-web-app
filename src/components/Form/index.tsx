@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Book } from '@/types';
 
+import './styles.scss';
+
 interface FormProps {
   onSubmit: (data: Book) => void;
   type: 'add' | 'edit';
@@ -70,38 +72,40 @@ const Form: React.FC<FormProps> = ({
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
+    <form className='form-container' onSubmit={handleSubmit(onSubmit)}>
+      <div className='form-input__container'>
         <label>Title</label>
-        <input type='text' { ...register('title', { required: true }) } />
-        {errors.title && <span>Title is required</span>}
+        <input type='text' className='form-input__element input-text' { ...register('title', { required: true }) } />
+        {errors.title && <span className='input-error'>Title is required</span>}
       </div>
 
-      <div>
+      <div className='form-input__container'>
         <label>Author</label>
-        <input type='text' { ...register('author', { required: true }) } />
-        {errors.author && <span>Author is required</span>}
+        <input type='text' className='form-input__element input-text' { ...register('author', { required: true }) } />
+        {errors.author && <span className='input-error'>Author is required</span>}
       </div>
 
-      <div>
+      <div className='form-input__container'>
         <label>Description</label>
-        <textarea { ...register('description', { required: true }) } />
-        {errors.description && <span>Description is required</span>}
+        <textarea className='form-input__element input-text-area' { ...register('description', { required: true }) } />
+        {errors.description && <span className='input-error'>Description is required</span>}
       </div>
 
-      <div>
+      <div className='form-input__container'>
         <label>Cover URL</label>
-        <input type='text' { ...register('cover', { required: true }) } />
-        {errors.cover && <span>Cover is required</span>}
+        <input type='text' className='form-input__element input-text' { ...register('cover', { required: true }) } />
+        {errors.cover && <span className='input-error'>Cover is required</span>}
       </div>
 
-      <div>
+      <div className='form-input__container'>
         <label>Publication Date</label>
-        <input type='date' { ...register('publicationDate', { required: true }) } />
-        {errors.publicationDate && <span>Date is required</span>}
+        <input type='date' className='form-input__element input-date' { ...register('publicationDate', { required: true }) } />
+        {errors.publicationDate && <span className='input-error'>Date is required</span>}
       </div>
 
-      <button type='submit'>{submitText()}</button>
+      <div className='form-input__container'>
+        <button className='button-primary' type='submit'>{submitText()}</button>
+      </div>
     </form>
   );
 };

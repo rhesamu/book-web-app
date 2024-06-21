@@ -22,7 +22,7 @@ const BookDetailsModal: React.FC<BookDetailsModalProps> = ({ isOpen, onClose, se
     if (data) {
       return (
         <div>
-          <h2>{data.title}</h2>
+          <h3>{data.title}</h3>
           <Section title='Author' content={data.author} />
           <Section title='Publication Date' content={displayDate(data.publicationDate)} />
           <Section title='Description' content={data.description} />

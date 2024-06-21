@@ -1,15 +1,21 @@
 .book {
   display: grid;
-  gap: 1rem;
+  gap: 1.5rem;
   grid-template-columns: repeat(4, 1fr);
 
   margin: 1rem 0;
-  padding: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 1.5rem;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  background-color: var(--color-background-default);
+  transition: border-color 0.25s;
 
   width: auto;
   cursor: pointer;
+
+  &:hover {
+    border-color: var(--color-primary);
+  }
 
   &__cover {
     grid-column: 1;
@@ -28,5 +34,15 @@
 
   &__info-section {
     margin-bottom: 1rem;
+  }
+
+  &__action {
+    display: flex;
+    justify-content: space-between;
+
+    &-section {
+      display: flex;
+      gap: 0.5rem;
+    }
   }
 }

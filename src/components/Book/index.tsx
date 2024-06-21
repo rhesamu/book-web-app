@@ -56,19 +56,21 @@ const Book: React.FC<BookProps> = ({
         <img className='book__cover__image' src={book.cover} alt={book.title} />
       </div>
       <div className='book__info'>
-        <h2>{book.title}</h2>
+        <h3>{book.title}</h3>
         <Section title='Author' content={book.author} />
         <Section
           title='Publication Date'
           content={displayDate(book.publicationDate)}
         />
         <Section title='Description' content={book.description} />
-        <div>
+        <div className='book__action'>
+          <div className='book__action-section'>
+            <button className='book__action-edit' onClick={handleEdit}>Edit</button>
+            <button className='book__action-delete' onClick={handleDelete}>Delete</button>
+          </div>
           <button className='book__action-favorite' onClick={handleFavorites}>
             {isFavorite ? 'Remove from favorites' : 'Add to favorites'}
           </button>
-          <button className='book__action-edit' onClick={handleEdit}>Edit</button>
-          <button className='book__action-delete' onClick={handleDelete}>Delete</button>
         </div>
       </div>
     </div>

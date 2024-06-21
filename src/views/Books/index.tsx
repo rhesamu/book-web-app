@@ -8,6 +8,8 @@ import { useFavorites } from '@/hooks';
 import { Book, Pagination, BookDetailsModal, DeleteConfirmationModal } from '@/components';
 import { Book as BookType } from '@/types';
 
+import './styles.scss';
+
 const Books: React.FC = () => {
   const { isError, isLoading, data } = useQuery({
     queryKey: ['books'],
@@ -77,8 +79,10 @@ const Books: React.FC = () => {
     const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
     return (
       <div>
-        <h1>Books</h1>
-        <button onClick={() => navigate('create')}>Create</button>
+        <div className='books-header'>
+          <h2>Books</h2>
+          <button className='button-primary' onClick={() => navigate('create')}>Create</button>
+        </div>
         <ul>
           {currentItems.map((book: BookType) => (
             <li key={book.id}>
@@ -96,6 +100,7 @@ const Books: React.FC = () => {
         <Pagination handleChange={handlePageChange} totalPages={totalPages} />
         <BookDetailsModal isOpen={isBookDetailsOpen} onClose={onCloseDetailsModal} selectedId={selectedId} />
         <DeleteConfirmationModal
+          selectedId={selectedId}
           isOpen={isDeleteConfirmationOpen}
           onClose={onCloseDeleteConfirmation}
           onConfirm={onDelete}
