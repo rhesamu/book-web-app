@@ -6,6 +6,6 @@ export type Book = {
   cover: string;
   publicationDate: string;
   isFavorite?: boolean;
-}
+};
 
 export type Books = Book[];

@@ -10,7 +10,11 @@ interface BookDetailsModalProps {
   selectedId: number | null;
 }
 
-const BookDetailsModal: React.FC<BookDetailsModalProps> = ({ isOpen, onClose, selectedId }) => {
+const BookDetailsModal: React.FC<BookDetailsModalProps> = ({
+  isOpen,
+  onClose,
+  selectedId,
+}) => {
   const { isError, isLoading, data } = useQuery({
     queryKey: ['book', selectedId],
     queryFn: () => getBookDetail(selectedId),
@@ -23,9 +27,12 @@ const BookDetailsModal: React.FC<BookDetailsModalProps> = ({ isOpen, onClose, se
       return (
         <div>
           <h3>{data.title}</h3>
-          <Section title='Author' content={data.author} />
-          <Section title='Publication Date' content={displayDate(data.publicationDate)} />
-          <Section title='Description' content={data.description} />
+          <Section title="Author" content={data.author} />
+          <Section
+            title="Publication Date"
+            content={displayDate(data.publicationDate)}
+          />
+          <Section title="Description" content={data.description} />
         </div>
       );
     }
@@ -35,7 +42,7 @@ const BookDetailsModal: React.FC<BookDetailsModalProps> = ({ isOpen, onClose, se
     <Modal isOpen={isOpen} onClose={onClose}>
       {content()}
     </Modal>
-  )
+  );
 };
 
 export default BookDetailsModal;

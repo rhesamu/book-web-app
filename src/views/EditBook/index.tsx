@@ -1,8 +1,8 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
-import { Form, LoadingSkeleton } from "@/components";
-import { Book } from "@/types";
+import { Form, LoadingSkeleton } from '@/components';
+import { Book } from '@/types';
 import { getBookDetail, updateLocalBook } from '@/services';
 
 const EditBook = () => {
@@ -20,14 +20,12 @@ const EditBook = () => {
   };
 
   const content = () => {
-    if (isLoading) return <LoadingSkeleton type='form' />;
+    if (isLoading) return <LoadingSkeleton type="form" />;
     if (isError) return <div>Error</div>;
     if (data) {
-      return (
-        <Form type='edit' onSubmit={onSubmit} book={data} />
-      );
+      return <Form type="edit" onSubmit={onSubmit} book={data} />;
     }
-  }
+  };
 
   return (
     <div>

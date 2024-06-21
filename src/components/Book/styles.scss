@@ -46,29 +46,35 @@
     }
 
     &-edit {
-      transition: border-color 0.25s, color 0.25s;
+      transition:
+        border-color 0.25s,
+        color 0.25s;
 
       &:hover {
         border-color: var(--color-primary);
-        color: #a8acff ;
+        color: #a8acff;
       }
     }
 
     &-delete {
-      transition: border-color 0.25s, color 0.25s;
+      transition:
+        border-color 0.25s,
+        color 0.25s;
 
       &:hover {
         border-color: var(--color-danger);
-        color: var(--color-danger) ;
+        color: var(--color-danger);
       }
     }
 
     &-favorite {
-      transition: border-color 0.25s, color 0.25s;
+      transition:
+        border-color 0.25s,
+        color 0.25s;
 
       &:hover {
         border-color: #fb94fd;
-        color: #fb94fd ;
+        color: #fb94fd;
       }
     }
   }

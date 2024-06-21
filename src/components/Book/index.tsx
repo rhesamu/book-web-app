@@ -19,11 +19,11 @@ interface Section {
 
 export const Section: React.FC<Section> = ({ title, content }) => {
   return (
-    <div className='book__info-section'>
+    <div className="book__info-section">
       <h4>{title}</h4>
       <p>{content}</p>
     </div>
-  )
+  );
 };
 
 const Book: React.FC<BookProps> = ({
@@ -38,7 +38,7 @@ const Book: React.FC<BookProps> = ({
   const handleFavorites = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     setFavorite(book.id);
-  }
+  };
 
   const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
@@ -50,31 +50,35 @@ const Book: React.FC<BookProps> = ({
     onDelete();
   };
 
-   return (
-    <div className='book' onClick={handleClick} {...props}>
-      <div className='book__cover'>
-        <img className='book__cover__image' src={book.cover} alt={book.title} />
+  return (
+    <div className="book" onClick={handleClick} {...props}>
+      <div className="book__cover">
+        <img className="book__cover__image" src={book.cover} alt={book.title} />
       </div>
-      <div className='book__info'>
+      <div className="book__info">
         <h3>{book.title}</h3>
-        <Section title='Author' content={book.author} />
+        <Section title="Author" content={book.author} />
         <Section
-          title='Publication Date'
+          title="Publication Date"
           content={displayDate(book.publicationDate)}
         />
-        <Section title='Description' content={book.description} />
-        <div className='book__action'>
-          <div className='book__action-section'>
-            <button className='book__action-edit' onClick={handleEdit}>Edit</button>
-            <button className='book__action-delete' onClick={handleDelete}>Delete</button>
+        <Section title="Description" content={book.description} />
+        <div className="book__action">
+          <div className="book__action-section">
+            <button className="book__action-edit" onClick={handleEdit}>
+              Edit
+            </button>
+            <button className="book__action-delete" onClick={handleDelete}>
+              Delete
+            </button>
           </div>
-          <button className='book__action-favorite' onClick={handleFavorites}>
+          <button className="book__action-favorite" onClick={handleFavorites}>
             {isFavorite ? 'Remove from favorites' : 'Add to favorites'}
           </button>
         </div>
       </div>
     </div>
-   );
+  );
 };
 
 export default Book;

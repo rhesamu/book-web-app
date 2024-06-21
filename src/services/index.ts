@@ -1,4 +1,4 @@
-import { Book } from "@/types";
+import { Book } from '@/types';
 
 export async function getBooks() {
   let books;
@@ -7,7 +7,9 @@ export async function getBooks() {
   if (localBooks) {
     books = JSON.parse(localBooks);
   } else {
-    const response = await fetch('https://my-json-server.typicode.com/cutamar/mock/books');
+    const response = await fetch(
+      'https://my-json-server.typicode.com/cutamar/mock/books'
+    );
 
     if (!response.ok) {
       throw new Error('Failed to fetch books');
@@ -29,7 +31,9 @@ export async function getBookDetail(id: number | null) {
     return parsedBooks.find((book: { id: number }) => book.id === id);
   }
 
-  const response = await fetch(`https://my-json-server.typicode.com/cutamar/mock/books/${id}`);
+  const response = await fetch(
+    `https://my-json-server.typicode.com/cutamar/mock/books/${id}`
+  );
 
   if (!response.ok) {
     throw new Error('Failed to fetch book detail');
@@ -87,19 +91,20 @@ export function getLocalFavorites() {
 export function setLocalFavorites(id: number) {
   const localFavorites = getLocalFavorites();
   if (localFavorites.includes(id)) {
-    const filtered = localFavorites.filter((favorite: number) => favorite !== id);
+    const filtered = localFavorites.filter(
+      (favorite: number) => favorite !== id
+    );
     localStorage.setItem('favorites', JSON.stringify(filtered));
   } else {
     localFavorites.push(id);
     localStorage.setItem('favorites', JSON.stringify(localFavorites));
   }
-
 }
 
 export const displayDate = (date: string) => {
   return new Date(date).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric'
+    day: 'numeric',
   });
-}
+};

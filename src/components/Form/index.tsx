@@ -15,29 +15,29 @@ const extractDate = (isoString: string) => {
 };
 
 const formatDate = (date: string) => {
-  return `${date}T00:00:00.000Z`
-}
+  return `${date}T00:00:00.000Z`;
+};
 
 const defaultValues = {
   title: '',
   author: '',
   description: '',
   cover: '',
-  publicationDate: ''
-}
-  
+  publicationDate: '',
+};
+
 const Form: React.FC<FormProps> = ({
   onSubmit: onSubmitCallback,
   type = 'add',
-  book
+  book,
 }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setValue
+    setValue,
   } = useForm<Book>({
-    defaultValues
+    defaultValues,
   });
 
   useEffect(() => {
@@ -54,8 +54,8 @@ const Form: React.FC<FormProps> = ({
   const onSubmit = (data: Book) => {
     const formattedData = {
       ...data,
-      publicationDate: formatDate(data.publicationDate)
-    }
+      publicationDate: formatDate(data.publicationDate),
+    };
     console.log('formattedData', formattedData);
     onSubmitCallback(formattedData);
   };
@@ -72,39 +72,66 @@ const Form: React.FC<FormProps> = ({
   };
 
   return (
-    <form className='form-container' onSubmit={handleSubmit(onSubmit)}>
-      <div className='form-input__container'>
+    <form className="form-container" onSubmit={handleSubmit(onSubmit)}>
+      <div className="form-input__container">
         <label>Title</label>
-        <input type='text' className='form-input__element input-text' { ...register('title', { required: true }) } />
-        {errors.title && <span className='input-error'>Title is required</span>}
+        <input
+          type="text"
+          className="form-input__element input-text"
+          {...register('title', { required: true })}
+        />
+        {errors.title && <span className="input-error">Title is required</span>}
       </div>
 
-      <div className='form-input__container'>
+      <div className="form-input__container">
         <label>Author</label>
-        <input type='text' className='form-input__element input-text' { ...register('author', { required: true }) } />
-        {errors.author && <span className='input-error'>Author is required</span>}
+        <input
+          type="text"
+          className="form-input__element input-text"
+          {...register('author', { required: true })}
+        />
+        {errors.author && (
+          <span className="input-error">Author is required</span>
+        )}
       </div>
 
-      <div className='form-input__container'>
+      <div className="form-input__container">
         <label>Description</label>
-        <textarea className='form-input__element input-text-area' { ...register('description', { required: true }) } />
-        {errors.description && <span className='input-error'>Description is required</span>}
+        <textarea
+          className="form-input__element input-text-area"
+          {...register('description', { required: true })}
+        />
+        {errors.description && (
+          <span className="input-error">Description is required</span>
+        )}
       </div>
 
-      <div className='form-input__container'>
+      <div className="form-input__container">
         <label>Cover URL</label>
-        <input type='text' className='form-input__element input-text' { ...register('cover', { required: true }) } />
-        {errors.cover && <span className='input-error'>Cover is required</span>}
+        <input
+          type="text"
+          className="form-input__element input-text"
+          {...register('cover', { required: true })}
+        />
+        {errors.cover && <span className="input-error">Cover is required</span>}
       </div>
 
-      <div className='form-input__container'>
+      <div className="form-input__container">
         <label>Publication Date</label>
-        <input type='date' className='form-input__element input-date' { ...register('publicationDate', { required: true }) } />
-        {errors.publicationDate && <span className='input-error'>Date is required</span>}
+        <input
+          type="date"
+          className="form-input__element input-date"
+          {...register('publicationDate', { required: true })}
+        />
+        {errors.publicationDate && (
+          <span className="input-error">Date is required</span>
+        )}
       </div>
 
-      <div className='form-input__container'>
-        <button className='button-primary' type='submit'>{submitText()}</button>
+      <div className="form-input__container">
+        <button className="button-primary" type="submit">
+          {submitText()}
+        </button>
       </div>
     </form>
   );

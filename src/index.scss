@@ -91,7 +91,9 @@ button:focus-visible {
   background-color: var(--color-primary);
   border-color: transparent;
   color: #fff;
-  transition: background-color 0.25s, border-color 0.25s;
+  transition:
+    background-color 0.25s,
+    border-color 0.25s;
 
   &:hover {
     background-color: #535bf2;
@@ -100,7 +102,8 @@ button:focus-visible {
   }
 }
 
-ul, li {
+ul,
+li {
   list-style: none;
   padding: 0;
   margin: 0;

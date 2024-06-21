@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { getLocalFavorites, setLocalFavorites } from "@/services";
+import { useEffect, useState } from 'react';
+import { getLocalFavorites, setLocalFavorites } from '@/services';
 
 export function useFavorites() {
   const [favorites, setFavorites] = useState<number[]>([]);
@@ -10,9 +10,9 @@ export function useFavorites() {
 
   const handleFavorites = (id: number) => {
     setLocalFavorites(id);
-    
+
     if (favorites.includes(id)) {
-      setFavorites(favorites.filter(favorite => favorite !== id));
+      setFavorites(favorites.filter((favorite) => favorite !== id));
     } else {
       setFavorites([...favorites, id]);
     }

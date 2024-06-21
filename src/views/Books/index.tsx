@@ -5,7 +5,13 @@ import { useNavigate } from 'react-router-dom';
 import { getBooks, deleteLocalBook, getLocalFavorites } from '@/services';
 import { useFavorites } from '@/hooks';
 
-import { Book, Pagination, BookDetailsModal, DeleteConfirmationModal, LoadingSkeleton } from '@/components';
+import {
+  Book,
+  Pagination,
+  BookDetailsModal,
+  DeleteConfirmationModal,
+  LoadingSkeleton,
+} from '@/components';
 import { Book as BookType } from '@/types';
 
 import './styles.scss';
@@ -14,20 +20,21 @@ const Books: React.FC = () => {
   const { isError, isLoading, data } = useQuery({
     queryKey: ['books'],
     queryFn: getBooks,
-    select: data => {
+    select: (data) => {
       const favorites = getLocalFavorites();
       return data.map((book: BookType) => ({
         ...book,
         isFavorite: favorites.includes(book.id),
       }));
-    }
+    },
   });
   const navigate = useNavigate();
   const { favorites, handleFavorites } = useFavorites();
 
   const [currentPage, setCurrentPage] = useState(1);
   const [isBookDetailsOpen, setIsBookDetailsOpen] = useState(false);
-  const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] = useState(false);
+  const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
+    useState(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
   const handlePageChange = (pageNumber: number) => {
@@ -64,7 +71,7 @@ const Books: React.FC = () => {
   };
 
   if (isLoading) {
-    return <LoadingSkeleton type='main'/>;
+    return <LoadingSkeleton type="main" />;
   }
 
   if (isError) {
@@ -79,9 +86,11 @@ const Books: React.FC = () => {
     const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
     return (
       <div>
-        <div className='books-header'>
+        <div className="books-header">
           <h2>Books</h2>
-          <button className='button-primary' onClick={() => navigate('create')}>Create</button>
+          <button className="button-primary" onClick={() => navigate('create')}>
+            Create
+          </button>
         </div>
         <ul>
           {currentItems.map((book: BookType) => (
@@ -98,7 +107,11 @@ const Books: React.FC = () => {
           ))}
         </ul>
         <Pagination handleChange={handlePageChange} totalPages={totalPages} />
-        <BookDetailsModal isOpen={isBookDetailsOpen} onClose={onCloseDetailsModal} selectedId={selectedId} />
+        <BookDetailsModal
+          isOpen={isBookDetailsOpen}
+          onClose={onCloseDetailsModal}
+          selectedId={selectedId}
+        />
         <DeleteConfirmationModal
           selectedId={selectedId}
           isOpen={isDeleteConfirmationOpen}
