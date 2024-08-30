@@ -1,7 +1,7 @@
 # Book Web App
 
 A book management system web application project built with 
-React, Typescript, Vite, React Router, React Query, React Hook Form, and it is styled using SASS.
+React, Typescript, Vite, React Router, React Query, React Hook Form, and styled using SASS.
 
 ## Features
 
