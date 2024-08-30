@@ -16,7 +16,7 @@ React, Typescript, Vite, React Router, React Query, React Hook Form, and styled 
 Install the dependencies:
 
 ```bash
-npm install
+npm install 
 ```
 To start the application, run:
 
